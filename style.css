@@ -1,0 +1,600 @@
+:root {
+  --pink-main: #ff85a2;
+  --pink-soft: #ffb7c5;
+  --pink-light: #ffeef2;
+  --white: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: radial-gradient(circle, var(--pink-light) 0%, var(--white) 100%);
+  font-family: "Dancing Script", cursive;
+  overflow-x: hidden;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* DEKORASI PITA (RIBBON) */
+.ribbon-decor-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background:
+    url("https://www.transparenttextures.com/patterns/pinstripe.png"),
+    var(--pink-soft);
+  clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%);
+  z-index: 10;
+}
+
+/* TYPOGRAPHY */
+.glow-text {
+  font-size: 2.5rem;
+  color: var(--pink-main);
+  text-shadow: 0 0 10px rgba(255, 133, 162, 0.5);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* GAME BUTTON */
+#runaway-btn {
+  padding: 15px 30px;
+  border-radius: 50px;
+  background: var(--pink-main);
+  color: white;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(255, 133, 162, 0.4);
+}
+
+/* LOADING PROGRESS */
+.progress-bar {
+  width: 80%;
+  height: 8px;
+  background: #eee;
+  border-radius: 10px;
+  margin: 20px auto;
+}
+.progress-fill {
+  height: 100%;
+  background: var(--pink-main);
+  width: 0%;
+  border-radius: 10px;
+}
+
+/* PHOTO RAIN */
+.falling-photo {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border: 2px solid white;
+  border-radius: 5px;
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+  }
+}
+
+/* LETTER */
+.letter {
+  background: white;
+  padding: 30px;
+  max-width: 400px;
+  margin: 100px auto;
+  border-radius: 2px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transform: rotate(-2deg);
+}
+
+/* MINIMALIST GALLERY */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  padding: 15px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.gallery-item {
+  overflow: hidden;
+  border-radius: 8px;
+  background: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.gallery-item img {
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(30%);
+  transition: 0.3s;
+}
+
+.gallery-item:active img {
+  filter: grayscale(0%);
+  transform: scale(1.05);
+}
+
+.photo-title {
+  font-size: 0.8rem;
+  padding: 8px;
+  text-align: center;
+  color: #888;
+}
+
+/* --- MODAL POLAROID STYLE --- */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 182, 193, 0.4); /* Overlay pink transparan */
+  backdrop-filter: blur(8px); /* Efek blur latar belakang */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.modal-content {
+  background: #ffffff;
+  padding: 15px 15px 60px 15px; /* Padding bawah lebih lebar untuk gaya polaroid */
+  max-width: 85%;
+  width: 350px;
+  border-radius: 2px;
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.2),
+    0 0 0 10px white; /* Frame putih tambahan */
+  transform: rotate(2deg); /* Sedikit miring agar estetik */
+  position: relative;
+  animation: polaroidIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes polaroidIn {
+  from {
+    opacity: 0;
+    transform: scale(0.5) rotate(-10deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(2deg);
+  }
+}
+
+/* Gambar di dalam Polaroid */
+#modalImg {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: sepia(10%) contrast(110%); /* Efek filter foto jadul */
+  border: 1px solid #eee;
+}
+
+/* Bagian Deskripsi di bawah foto */
+#caption {
+  padding-top: 20px;
+  text-align: center;
+}
+
+#caption h3 {
+  font-family: "Dancing Script", cursive;
+  font-size: 1.8rem;
+  color: var(--pink-main);
+  margin-bottom: 5px;
+}
+
+#caption p {
+  font-family: "Poppins", sans-serif;
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.4;
+  font-style: italic;
+}
+
+/* Tombol Close yang lebih estetik */
+.close-btn {
+  position: absolute;
+  top: -50px;
+  right: 0;
+  font-size: 40px;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.close-btn:hover {
+  color: var(--pink-main);
+  transform: scale(1.2);
+}
+
+/* Efek "Selotip" di atas foto (Opsional - Dekorasi Tambahan) */
+.modal-content::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 30px;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(2px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Responsive untuk Mobile */
+@media (max-width: 480px) {
+  .modal-content {
+    width: 80%;
+    padding: 10px 10px 40px 10px;
+  }
+  #caption h3 {
+    font-size: 1.4rem;
+  }
+  #caption p {
+    font-size: 0.8rem;
+  }
+}
+
+/* --- WELCOME PAGE ENHANCEMENT --- */
+#welcome-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(circle at center, #fff5f7 0%, #ffeef2 100%);
+}
+
+/* Glassmorphism Card */
+.welcome-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  padding: 40px 25px;
+  border-radius: 30px;
+  box-shadow: 0 20px 40px rgba(255, 133, 162, 0.15);
+  text-align: center;
+  width: 85%;
+  max-width: 400px;
+  z-index: 5;
+  animation: fadeInUp 1s ease-out;
+}
+
+/* Profile Image Frame */
+.profile-frame {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 20px;
+}
+
+.welcome-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #fff;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.heart-badge {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: var(--pink-main);
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  animation: beat 1.2s infinite;
+}
+
+/* Sweet Text Style */
+.sweet-text {
+  font-size: 1.1rem;
+  color: #886a71;
+  margin-bottom: 25px;
+  line-height: 1.4;
+}
+
+/* Interactive Button */
+#runaway-btn {
+  background: linear-gradient(45deg, #ff85a2, #ffb7c5);
+  border: none;
+  padding: 12px 20px;
+  color: white;
+  border-radius: 15px;
+  font-family: "Dancing Script", cursive;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 auto;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn-badge {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 2px 10px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+}
+
+/* Heart Spinner */
+.heart-spinner {
+  width: 40px;
+  height: 40px;
+  background-color: var(--pink-main);
+  margin: 20px auto;
+  clip-path: path(
+    "M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+  );
+  animation: pulse-load 1s infinite alternate;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes beat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+@keyframes pulse-load {
+  from {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  to {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+/* Floating Elements Decoration */
+.floating-hearts i {
+  position: absolute;
+  color: rgba(255, 133, 162, 0.2);
+  z-index: 1;
+}
+
+.h-1 {
+  top: 10%;
+  left: 10%;
+  font-size: 40px;
+  animation: float 6s infinite;
+}
+.h-2 {
+  top: 20%;
+  right: 15%;
+  font-size: 30px;
+  animation: float 8s infinite;
+}
+.r-1 {
+  bottom: 15%;
+  left: 20%;
+  font-size: 25px;
+  transform: rotate(45deg);
+}
+.h-3 {
+  bottom: 10%;
+  right: 10%;
+  font-size: 50px;
+  animation: float 7s infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+  50% {
+    transform: translateY(-20px) rotate(20deg);
+  }
+}
+
+/* Pastikan container game memiliki area yang jelas */
+#game-container {
+  position: relative;
+  width: 100%;
+  height: 150px; /* Area terbatas untuk tombol bergerak */
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Mencegah tombol keluar garis */
+  border-radius: 15px;
+  background: rgba(255, 133, 162, 0.03); /* Area halus penanda game */
+}
+
+#runaway-btn {
+  position: absolute; /* Penting agar bisa bergerak */
+  z-index: 10;
+  white-space: nowrap;
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* --- TOMBOL GALERI MENARIK --- */
+#btn-to-gallery {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 30px auto 0;
+  padding: 12px 25px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+
+  color: white;
+  background: linear-gradient(45deg, #ff85a2, #ffb7c5);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+
+  box-shadow: 0 4px 15px rgba(255, 133, 162, 0.4);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  overflow: hidden;
+  position: relative;
+}
+
+#btn-to-gallery::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+#btn-to-gallery:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(255, 133, 162, 0.6);
+}
+
+#btn-to-gallery:hover::after {
+  left: 100%;
+}
+
+#btn-to-gallery i {
+  font-size: 1.1rem;
+  animation: heartBeat 1.5s infinite;
+}
+
+@keyframes heartBeat {
+  0% {
+    transform: scale(1);
+  }
+  14% {
+    transform: scale(1.3);
+  }
+  28% {
+    transform: scale(1);
+  }
+  42% {
+    transform: scale(1.3);
+  }
+  70% {
+    transform: scale(1);
+  }
+}
+
+/* --- TOMBOL GALERI MENARIK --- */
+#btn-to-gallery {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 30px auto 0;
+  padding: 12px 25px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+
+  color: white;
+  background: linear-gradient(45deg, #ff85a2, #ffb7c5);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+
+  box-shadow: 0 4px 15px rgba(255, 133, 162, 0.4);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  overflow: hidden;
+  position: relative;
+}
+
+#btn-to-gallery::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+#btn-to-gallery:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(255, 133, 162, 0.6);
+}
+
+#btn-to-gallery:hover::after {
+  left: 100%;
+}
+
+#btn-to-gallery i {
+  font-size: 1.1rem;
+  animation: heartBeat 1.5s infinite;
+}
+
+@keyframes heartBeat {
+  0% {
+    transform: scale(1);
+  }
+  14% {
+    transform: scale(1.3);
+  }
+  28% {
+    transform: scale(1);
+  }
+  42% {
+    transform: scale(1.3);
+  }
+  70% {
+    transform: scale(1);
+  }
+}
